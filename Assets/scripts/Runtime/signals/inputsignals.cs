@@ -1,4 +1,5 @@
 using System;
+using Runtime.Keys;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +24,6 @@ namespace Runtime.signals
 
         #endregion
         
-        public UnityAction<float2> Oninputtaken=delegate {  };
+        public UnityAction<InputParams> Oninputtaken=delegate {  };
     }
 }

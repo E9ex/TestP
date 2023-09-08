@@ -1,4 +1,6 @@
 using System;
+using Runtime.data.Valueobject;
+using Runtime.Keys;
 using Runtime.Managers;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Runtime.Controllers
         private float2 _inputvalues;
         [SerializeField] private playermanager manager;
         private Rigidbody _rigidbody;
-        [SerializeField] private float speed;
+        [SerializeField] private static playermovementdata data;
 
         private void Awake()
         {
@@ -22,9 +24,9 @@ namespace Runtime.Controllers
             _rigidbody = GetComponent<Rigidbody>();
         }
 
-        internal void onInputtaken(float2 ınputparams)
+        internal void onInputtaken(InputParams ınputparams)
         {
-            _inputvalues = ınputparams;
+            _inputvalues = ınputparams.InputValues;
         }
         private void FixedUpdate()
         {
@@ -32,7 +34,12 @@ namespace Runtime.Controllers
         }
         private void MovePlayer()
         {
-            _rigidbody.velocity += new Vector3(_inputvalues.x, 0, _inputvalues.y) * (speed * Time.fixedDeltaTime);
+            _rigidbody.velocity += new Vector3(_inputvalues.x, 0, _inputvalues.y) * (data.speed * Time.fixedDeltaTime);
+        }
+
+        public static void setmovementdata(playermovementdata playermovementdata)
+        {
+            data = playermovementdata;
         }
     }
 }
